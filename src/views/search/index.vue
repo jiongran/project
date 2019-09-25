@@ -83,7 +83,7 @@
      * @property {Array} list - 列表
      */
     isPc: number = util.getAppdown()
-    name: any = this.$route.query.name || ''
+    name: any = ''
     pageIndex: number = 1
     pageSize: number = setting.defaultPageSize
     total: number = 0
@@ -116,7 +116,7 @@
      * @desc 获取数据
      * @method getList
      */
-    getList(): void {
+    getList() {
       let data = {
         content: this.name,
         language: this.language,
@@ -142,16 +142,17 @@
      */
     changeColor(dataList: Array<any>): Array<any> {
       let list = []
-      for (let i = 0; i < dataList.length; i++) {
-        if (this.name && this.name.length > 0) {
+      list = dataList.map((key, val) => {
+        if (key && (this.name && this.name.length > 0)) {
           let replaceReg = new RegExp(this.name, 'g')
           // 高亮替换v-html值
           let replaceString = '<span class="search-text">' + this.name + '</span>'
-          list[i] = util.clone(dataList[i]);
-          (list as Array<any>)[i]['title'] = (dataList as any)[i]['title'].replace(replaceReg, replaceString);
-          (list as Array<any>)[i]['abstract'] = (dataList as any)[i]['abstract'].replace(replaceReg, replaceString)
+          let item = util.clone(key)
+          item['title'] = item['title'].replace(replaceReg, replaceString)
+          item['abstract'] = item['abstract'].replace(replaceReg, replaceString)
+          return item
         }
-      }
+      })
       return list
     }
 
@@ -192,6 +193,7 @@
 
     mounted() {
       util.setTitle(this.$route.name)
+      this.name = this.$route.query.name
       this.getList()
     }
   }
@@ -207,25 +209,31 @@
     @media (min-width: 1160px) {
       width: 90%;
     }
+
     /deep/ .el-breadcrumb {
       line-height: 2;
+
       .is-link {
         cursor: pointer;
         color: @link-light-color;
       }
     }
+
     p, h1, h2, h3, h4 {
       margin: 0;
       padding: 0
     }
+
     .search-subNav {
       clear: both;
       margin: 0 auto;
+
       .pull-right {
         float: right;
         width: 200px;
       }
     }
+
     .search-subNav-mobil {
       @media (max-width: 768px) {
         background: #35afe4 linear-gradient(#53cef0, #35afe4);
@@ -241,6 +249,7 @@
         display: none;
       }
     }
+
     .search-page-header {
       margin: 10px 0;
       @media (min-width: 768px) {
@@ -250,10 +259,12 @@
       @media (max-width: 768px) {
         padding: 0 10px;
       }
+
       .search-page-header-title {
         font-size: 32px;
         margin-bottom: 10px;
       }
+
       .search-page-header-info {
         font-weight: 300;
         margin: 0 0 30px 0;
@@ -263,22 +274,27 @@
         }
       }
     }
+
     .search-results-list {
       margin-bottom: 25px;
       @media (max-width: 768px) {
         padding: 0 10px;
       }
+
       .search-results-item {
         border-bottom: 1px solid @footer-line;
         padding: 20px 0;
+
         .search-results-item-link {
         }
+
         .search-results-item-description {
           margin-top: 15px;
         }
 
       }
     }
+
     .pagi {
       text-align: center;
       margin: 20px auto;

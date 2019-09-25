@@ -72,19 +72,20 @@
      * @property {String} topCategoryName - 总分类名称
      * @property {String} currentCategoryName - 当前分类名称
      */
-    isPc:number= util.getAppdown()
-    pageIndex:number= 1
-    pageSize:number=setting.defaultPageSize
-    total:number= 0
-    categoriesList:Array<any>= []
-    topCategoryId:string= ''
-    topCategoryName:string= ''
-    currentCategoryName:string= ''
+    isPc: number = util.getAppdown()
+    pageIndex: number = 1
+    pageSize: number = setting.defaultPageSize
+    total: number = 0
+    categoriesList: Array<any> = []
+    topCategoryId: string = ''
+    topCategoryName: string = ''
+    currentCategoryName: string = ''
 
-    get language():string {
+    get language(): string {
       return AppModule.language
     }
-    get pcFlag ():boolean {
+
+    get pcFlag(): boolean {
       let flag = false
       if (!this.isPc) {
         if (this.total && this.total > setting.defaultPageSize) {
@@ -98,7 +99,7 @@
      * @desc 切换语言
      * @method onLanguageChange
      */
-    onLanguageChange ():void {
+    onLanguageChange(): void {
       util.setTitle(this.$route.name)
       this.pageSize = setting.defaultPageSize
       this.pageIndex = 1
@@ -110,7 +111,7 @@
      * @method onSearchChange
      * @param {String} val - 查询内容
      */
-    onSearchChange (val:string):void {
+    onSearchChange(val: string): void {
       this.$router.push({
         name: 'search',
         query: {
@@ -118,12 +119,13 @@
         }
       })
     }
+
     /**
      * @desc 更改每页长度 重新查询
      * @method handleSizeChange
      * @param {Number} val - 每页长度
      */
-    handleSizeChange (val:number):void {
+    handleSizeChange(val: number): void {
       this.pageSize = val
       this.pageIndex = 1
       this.getData()
@@ -134,7 +136,7 @@
      * @method handleCurrentChange
      * @param {Number} val - 页码
      */
-    handleCurrentChange (val:number):void {
+    handleCurrentChange(val: number): void {
       this.pageIndex = val
       this.getData()
     }
@@ -143,7 +145,7 @@
      * @desc 获取数据
      * @method getData
      */
-    getData ():void {
+    getData(): void {
       api.getArticlesByCategory({
         language: this.language,
         categoryId: this.$route.params['id'],
@@ -165,92 +167,105 @@
       })
     }
 
-    mounted () {
+    mounted() {
       util.setTitle(this.$route.name)
       this.getData()
     }
   }
-  </script>
+</script>
 
 <style scoped lang="less">
-.list {
-  line-height: 1.5;
-  margin: 0 auto;
-  margin-top: 20px;
-  max-width: @max-width;
-  min-height: 65vh;
-  @media (min-width: 1160px) {
-    width: 90%;
-  }
-  @media (max-width: 768px) {
-    padding: 0 10px;
-  }
-  /deep/ .el-breadcrumb {
-    line-height: 2;
-    .is-link {
-      cursor: pointer;
-      color: @link-light-color;
-    }
-  }
-  p, h1, h2, h3, h4 {
-    margin: 0;
-    padding: 0
-  }
-  .list-subNav {
-    clear: both;
+  .list {
+    line-height: 1.5;
     margin: 0 auto;
-    .pull-right {
-      float: right;
-      width: 200px;
+    margin-top: 20px;
+    max-width: @max-width;
+    min-height: 65vh;
+    @media (min-width: 1160px) {
+      width: 90%;
     }
-  }
-  .list-container {
-    display: flex;
-    justify-content: flex-end;
-    .list-content {
-      flex: 1;
-      .page-header {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: 10px 0;
-        h1 {
-          font-size: 32px;
-          flex-grow: 1;
-          color: #39414a;
-          font-weight: 600;
-          margin-bottom: 10px;
-        }
+    @media (max-width: 768px) {
+      padding: 0 10px;
+    }
+
+    /deep/ .el-breadcrumb {
+      line-height: 2;
+
+      .is-link {
+        cursor: pointer;
+        color: @link-light-color;
       }
-      .article-list {
-        .article-item {
-          border-bottom: 1px solid @footer-line;
-          font-size: 14px;
-          padding: 15px 0;
-          @media (min-width: 768px) {
-            width: 48%;
-            margin-right: 20px;
-            display: inline-block;
+    }
+
+    p, h1, h2, h3, h4 {
+      margin: 0;
+      padding: 0
+    }
+
+    .list-subNav {
+      clear: both;
+      margin: 0 auto;
+
+      .pull-right {
+        float: right;
+        width: 200px;
+      }
+    }
+
+    .list-container {
+      display: flex;
+      justify-content: flex-end;
+
+      .list-content {
+        flex: 1;
+
+        .page-header {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin: 10px 0;
+
+          h1 {
+            font-size: 32px;
+            flex-grow: 1;
+            color: #39414a;
+            font-weight: 600;
+            margin-bottom: 10px;
           }
-          @media (max-width: 768px) {
-            width: 100%;
-            display: block;
-          }
-          .article-item-link {
-            color: @link-dark-color;
-            &:hover {
-              color: @link-light-color;
+        }
+
+        .article-list {
+          .article-item {
+            border-bottom: 1px solid @footer-line;
+            font-size: 14px;
+            padding: 15px 0;
+            @media (min-width: 768px) {
+              width: 48%;
+              margin-right: 20px;
+              display: inline-block;
+            }
+            @media (max-width: 768px) {
+              width: 100%;
+              display: block;
+            }
+
+            .article-item-link {
+              color: @link-dark-color;
+
+              &:hover {
+                color: @link-light-color;
+              }
             }
           }
         }
-      }
-      .pagi {
-        text-align: center;
-        margin: 20px auto;
+
+        .pagi {
+          text-align: center;
+          margin: 20px auto;
+        }
       }
     }
   }
-}
 
 </style>

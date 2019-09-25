@@ -86,7 +86,7 @@
     categoriesTotle: number = 0
     articleDetail: any = {}
 
-    get language():string {
+    get language(): string {
       return AppModule.language
     }
 
@@ -94,7 +94,7 @@
      * @desc 切换语言
      * @method onLanguageChange
      */
-    onLanguageChange():void {
+    onLanguageChange(): void {
       util.setTitle(this.$route.name)
       this.getData()
     }
@@ -104,7 +104,7 @@
      * @param {String} val 内容
      * @method onSearchChange
      */
-    onSearchChange(val: string):void {
+    onSearchChange(val: string): void {
       this.$router.push({
         name: 'search',
         query: {
@@ -117,7 +117,7 @@
      * @description 获取数据
      * @method getData
      */
-    getData():void {
+    getData(): void {
       Promise.all([api.getArticlesByCategory({
         language: this.language,
         categoryId: this.categoryId,
@@ -134,14 +134,14 @@
       })
     }
 
-    created():void {
+    created() {
       util.setTitle(this.$route.name)
       this.categoryId = this.$route.params['categoryId']
       this.id = this.$route.params['id']
       this.getData()
     }
 
-    beforeRouteUpdate(to:any, from:any, next:any) {
+    beforeRouteUpdate(to: any, from: any, next: any) {
       this.categoryId = to.params.categoryId
       this.id = to.params.id
       this.getData()
@@ -171,13 +171,16 @@
     @media (max-width: 768px) {
       padding: 0 10px;
     }
+
     /deep/ .el-breadcrumb {
       line-height: 2;
+
       .is-link {
         cursor: pointer;
         color: @link-light-color;
       }
     }
+
     p, h1, h2, h3, h4 {
       margin: 0;
       padding: 0
@@ -186,11 +189,13 @@
     .detail-subNav {
       clear: both;
       margin: 0 auto;
+
       .pull-right {
         float: right;
         width: 200px;
       }
     }
+
     .detail-container {
       display: flex;
       flex-direction: column;
@@ -201,6 +206,7 @@
       @media (max-width: 768px) {
         flex-direction: column-reverse;
       }
+
       .detail-sidebar {
         flex: 1 0 auto;
         margin-bottom: 20px;
@@ -210,6 +216,7 @@
           flex: 0 0 17%;
           height: auto;
         }
+
         .collapsible-sidebar {
           flex: 1;
           padding: 10px 0;
@@ -218,27 +225,33 @@
             max-height: none;
             padding: 0;
           }
+
           .collapsible-sidebar-title {
             font-weight: 600;
             font-size: 15px;
             position: relative;
             margin-top: 0;
           }
+
           .sidenav-item {
             border-bottom: 1px solid @footer-line;
+
             .sidenav-item-link {
               border-radius: 4px;
               color: @link-dark-color;
               display: block;
               padding: 10px;
+
               &:hover, &.current {
                 color: @link-light-color;
               }
             }
           }
+
           .collapsible-sidebar-sapce {
             height: 20px;
           }
+
           .see-all-articles {
             font-size: 12px;
             text-align: center;
@@ -248,6 +261,7 @@
           }
         }
       }
+
       .detail-content {
         flex: 1 0 auto;
         @media (min-width: 1024px) {
@@ -256,6 +270,7 @@
           min-width: 640px;
           padding: 0 30px;
         }
+
         .detail-content-header {
           align-items: flex-start;
           display: flex;
@@ -268,16 +283,19 @@
             flex-direction: row;
             margin-top: 0;
           }
+
           .detail-content-header-title {
             font-size: 32px;
             @media (min-width: 768px) {
               flex-basis: 100%;
             }
           }
+
           .detail-content-header-time {
             color: @link-dark-color;
           }
         }
+
         .detail-content-info {
           line-height: 1.6;
           margin: 20px 0;

@@ -40,8 +40,8 @@
     }
 
     public handleCommand(lang: string) {
-      this.$i18n.locale = lang
       AppModule.SetLanguage(lang)
+      this.$i18n.locale = lang
       this.$emit('onLanguageChange')
     }
 
@@ -57,29 +57,36 @@
 <style scoped lang="less">
   .header {
     border-bottom: 1px solid @footer-line;
+
     .header-wrap {
       max-width: @max-width;
       margin: 0 auto;
       padding: 10px 0;
       position: relative;
       justify-content: space-between;
+
       &:after, &:before {
         display: table;
         content: "";
       }
+
       &:after {
         clear: both;
       }
+
       @media (min-width: 1160px) {
         width: 90%;
       }
+
       .logo {
         height: 40px;
         display: inline-block;
+
         img {
           height: 100%;
         }
       }
+
       .pull-right {
         vertical-align: middle;
         margin-top: 12px;

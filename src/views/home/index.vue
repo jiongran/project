@@ -97,7 +97,7 @@
      * @property {Boolean} isShowMore - 最近的活动-更多状态
      */
     util = util
-    categoriesList:Array<any> = []
+    categoriesList: Array<any> = []
     questionList: Array<any> = []
     recentActivityList: Array<any> = []
     recentActivityTime: number = 0
@@ -200,24 +200,29 @@
   .main {
     line-height: 1.5;
     min-height: 65vh;
+
     .wrap {
       background: #35afe4 linear-gradient(#53cef0, #35afe4);
       background-image: none;
       padding: 60px 0 40px 0;
+
       .wrapConent {
         max-width: 610px;
         margin: 0 auto;
+
         .title {
           text-align: center;
           font-size: 28px;
           color: #fff;
         }
+
         .search {
           width: 80%;
           margin: 20px auto;
         }
       }
     }
+
     .categories {
       margin: 20px auto;
       max-width: @max-width;
@@ -227,6 +232,7 @@
       @media (max-width: 768px) {
         padding: 0 10px;
       }
+
       .blocks-list {
         display: flex;
         flex-wrap: wrap;
@@ -236,6 +242,7 @@
         @media (max-width: 768px) {
           margin: 0;
         }
+
         .blocks-item {
           border: 2px solid #c1d8d6;
           border-radius: 4px;
@@ -247,18 +254,23 @@
           margin: 0 20px 20px 0;
           max-width: 100%;
           text-align: center;
+
           &:hover {
             border-color: @link-light-hover-color;
           }
+
           @media (max-width: 768px) {
             margin: 0 0 20px 0;
           }
+
           .blocks-item-link {
             padding: 25px 20px;
+
             .blocks-item-title {
               color: @link-color;
               margin: 0;
             }
+
             .blocks-item-description {
               color: @description-color;
               margin: 0;
@@ -268,6 +280,7 @@
         }
       }
     }
+
     .articles {
       margin: 0 auto;
       max-width: @max-width;
@@ -277,11 +290,13 @@
       @media (max-width: 768px) {
         padding: 0 10px;
       }
+
       .articles-title {
         color: @link-color;
         font-size: 18px;
         font-weight: 400;
       }
+
       .article-list {
         display: flex;
         flex-direction: column;
@@ -289,6 +304,7 @@
         @media (min-width: 768px) {
           flex-direction: row;
         }
+
         .article-item {
           flex: 1 0 auto;
           @media (min-width: 768px) {
@@ -297,10 +313,12 @@
             padding-right: 10px;
             width: 32%;
           }
+
           .article-item-link {
             color: @link-dark-color;
             display: block;
             padding: 20px 0;
+
             &:hover {
               color: @link-light-color;
             }
@@ -308,6 +326,7 @@
         }
       }
     }
+
     .recent-activity {
       padding: 30px 0;
       margin: 0 auto;
@@ -320,18 +339,22 @@
       @media (max-width: 768px) {
         padding: 30px 10px;
       }
+
       .recent-activity-header {
         margin-bottom: 10px;
         text-align: center;
       }
+
       .recent-activity-list {
         .recent-activity-item {
           border-bottom: 1px solid @footer-line;
           overflow: auto;
           padding: 20px 0;
+
           &.noBorder {
             border-bottom: none;
           }
+
           .recent-activity-item-parent {
             margin: 6px 0;
             color: @link-color;
@@ -344,6 +367,7 @@
               margin: 0;
             }
           }
+
           .recent-activity-item-link {
             color: @link-dark-color;
             display: inline-block;
@@ -353,10 +377,12 @@
               width: 70%;
               margin: 0;
             }
+
             &:hover {
               color: @link-light-color;
             }
           }
+
           .recent-activity-item-meta {
             margin: 20px 0 0 0;
             float: none;
@@ -364,6 +390,7 @@
               margin: 0;
               float: right;
             }
+
             .recent-activity-item-time {
               color: @description-color;
               display: inline-block;
@@ -373,8 +400,10 @@
           }
         }
       }
+
       .recent-activity-controls {
         padding-top: 20px;
+
         .recent-activity-controls-link {
           color: @link-light-color;
         }

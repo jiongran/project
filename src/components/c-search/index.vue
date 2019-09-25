@@ -14,12 +14,12 @@
     @Prop({ default: '' }) private valueData!: string
     public val: string = this.valueData
 
-    get placeholder():string {
+    get placeholder(): string {
       return (this.$t('components.search') as string)
     }
 
     @Watch('valueData')
-    private onValueDataChange(newVal: string):void {
+    private onValueDataChange(newVal: string): void {
       this.val = newVal
     }
 

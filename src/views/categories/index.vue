@@ -137,45 +137,55 @@
     @media (max-width: 768px) {
       padding: 0 10px;
     }
+
     /deep/ .el-breadcrumb {
       line-height: 2;
+
       .is-link {
         cursor: pointer;
         color: @link-light-color;
       }
     }
+
     p, h1, h2, h3, h4 {
       margin: 0;
       padding: 0
     }
+
     .category-subNav {
       clear: both;
       margin: 0 auto;
+
       .pull-right {
         float: right;
         width: 200px;
       }
     }
+
     .category-container {
       display: flex;
       justify-content: flex-end;
+
       .category-content {
         flex: 1;
         @media (min-width: 1024px) {
           flex: 0 0 100%;
         }
+
         .page-header {
           display: flex;
           flex-direction: column;
           flex-wrap: wrap;
           justify-content: space-between;
           margin: 10px 0;
+
           h1 {
             color: @link-color;
             font-size: 32px;
             flex-grow: 1;
             margin-bottom: 10px;
           }
+
           .page-header-description {
             font-style: italic;
             font-weight: 300;
@@ -186,11 +196,13 @@
               flex-basis: 100%;
             }
           }
+
           @media (min-width: 768px) {
             align-items: baseline;
             flex-direction: row;
           }
         }
+
         .section-tree {
           display: flex;
           flex-direction: column;
@@ -199,6 +211,7 @@
           @media (min-width: 768px) {
             flex-direction: row;
           }
+
           .section {
             flex: initial;
 
@@ -207,29 +220,35 @@
               flex: 0 0 45%;
               margin-bottom: 60px;
             }
+
             .section-tree-title {
               font-size: 18px;
               font-weight: 700;
               margin-bottom: 0;
               color: #111;
               word-break: break-word;
+
               .section-tree-title-link {
                 color: @link-dark-color;
               }
             }
+
             .article-list {
               .article-item {
                 border-bottom: 1px solid @footer-line;
                 font-size: 14px;
                 padding: 15px 0;
+
                 .article-item-link {
                   color: @link-dark-color;
+
                   &:hover {
                     color: @link-light-color;
                   }
                 }
               }
             }
+
             .see-all-articles {
               display: block;
               padding: 15px 0;

@@ -1,33 +1,33 @@
 import Cookies from 'js-cookie'
-import setting from '@/settings'
+import settings from '@/settings'
 
 const languageKey = 'language'
-export const getLanguage = (flag: boolean = setting.defaultStorageState) => {
+export const getLanguage = (flag: boolean = settings.defaultStorageState) => {
   if (flag) {
-    Cookies.get(setting.defaultSystemName + languageKey)
+    return Cookies.get(settings.defaultSystemName + languageKey)
   } else {
-    localStorage.getItem(setting.defaultSystemName + languageKey)
+    return localStorage.getItem(settings.defaultSystemName + languageKey)
   }
 }
-export const setLanguage = (language: string, flag: boolean = setting.defaultStorageState) => {
+export const setLanguage = (language: string, flag: boolean = settings.defaultStorageState) => {
   if (flag) {
-    Cookies.set(setting.defaultSystemName + languageKey, language)
+    Cookies.set(settings.defaultSystemName + languageKey, language)
   } else {
-    localStorage.setItem(setting.defaultSystemName + languageKey, language)
+    localStorage.setItem(settings.defaultSystemName + languageKey, language)
   }
 }
 const tokenKey = 'token'
-export const getToken = (flag: boolean = setting.defaultStorageState) => {
+export const getToken = (flag: boolean = settings.defaultStorageState) => {
   if (flag) {
-    Cookies.get(setting.defaultSystemName + tokenKey)
+    Cookies.get(settings.defaultSystemName + tokenKey)
   } else {
-    localStorage.getItem(setting.defaultSystemName + tokenKey)
+    localStorage.getItem(settings.defaultSystemName + tokenKey)
   }
 }
-export const setToken = (token: string, flag: boolean = setting.defaultStorageState) => {
+export const setToken = (token: string, flag: boolean = settings.defaultStorageState) => {
   if (flag) {
-    Cookies.set(setting.defaultSystemName + tokenKey, token)
+    Cookies.set(settings.defaultSystemName + tokenKey, token)
   } else {
-    localStorage.setItem(setting.defaultSystemName + tokenKey, token)
+    localStorage.setItem(settings.defaultSystemName + tokenKey, token)
   }
 }
