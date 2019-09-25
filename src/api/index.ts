@@ -16,8 +16,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   if (process.env.VUE_APP_TITLE === 'alpha') {
     prefixerForProxy = 'http://searchapi.ledx.xyz'
-  }
-  else if (process.env.VUE_APP_TITLE === 'beta') {
+  } else if (process.env.VUE_APP_TITLE === 'beta') {
     prefixerForProxy = 'https://hsapi.aoo.world'
   }
 }

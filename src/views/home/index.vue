@@ -87,7 +87,7 @@
   @Component({
     name: 'Home'
   })
-  export default class extends Vue implements IHomeData {
+  export default class extends Vue {
     /**
      * @typedef {Object} Data
      * @property {Array} categoriesList - 主目录
