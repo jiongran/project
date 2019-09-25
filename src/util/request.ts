@@ -59,7 +59,7 @@ http.interceptors.request.use(config => {
     loadingInstance = Loading.service({ fullscreen: true })
     removePending(config)
     config.cancelToken = new CancelToken((c) => {
-        var url = getURL(config)
+        const url = getURL(config)
         pending.push({ u: url, f: c })
     })
     config.timeout = 10000
@@ -112,7 +112,7 @@ function processRes(res: AxiosResponse) {
         }
         res.data.data = obj
     }
-    return res
+    return res.data.data
 }
 
 export default http

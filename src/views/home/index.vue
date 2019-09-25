@@ -80,14 +80,14 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import { AppModule } from '@/store/modules/app'
-  import * as api from '@/api'
-  import * as util from '@/util/index'
+  import api from '@/api'
+  import util from '@/util/index'
   import setting from '@/settings'
 
   @Component({
     name: 'Home'
   })
-  export default class extends Vue {
+  export default class extends Vue implements IHomeData {
     /**
      * @typedef {Object} Data
      * @property {Array} categoriesList - 主目录
@@ -97,13 +97,13 @@
      * @property {Boolean} isShowMore - 最近的活动-更多状态
      */
     util = util
-    categoriesList: Array<any> = []
+    categoriesList:Array<any> = []
     questionList: Array<any> = []
     recentActivityList: Array<any> = []
     recentActivityTime: number = 0
     isShowMore: boolean = false
 
-    get language() {
+    get language(): string {
       return AppModule.language
     }
 
@@ -111,7 +111,7 @@
      * @desc 切换语言
      * @method onLanguageChange
      */
-    public onLanguageChange() {
+    public onLanguageChange(): void {
       this.recentActivityTime = 0
       this.isShowMore = false
       util.setTitle(this.$route.name)
@@ -124,7 +124,7 @@
      * @method onSearchChange
      * @param {String} val - 查询内容
      */
-    public onSearchChange(val:string) {
+    public onSearchChange(val: string): void {
       this.$router.push({
         name: 'search',
         query: {
@@ -137,15 +137,15 @@
      * @desc 获取数据
      * @method getData
      */
-    public getData() {
-      Promise.all([api.getCategories({ language: this.language }), api.promotedArticles({ language: this.language })]).then((response) => {
-        let categoriesList = response[0] ? (response[0].data.data.list || []) : []
-        this.categoriesList = categoriesList.map((key:any) => {
+    public getData(): void {
+      Promise.all([api.getCategories({ language: this.language }), api.promotedArticles({ language: this.language })]).then((res: any) => {
+        let categoriesList = res[0] ? (res[0].list || []) : []
+        this.categoriesList = categoriesList.map((key: any) => {
           if (!key.parentId) {
             return key
           }
         })
-        this.questionList = response[1] ? (response[1].data.data.list || []) : []
+        this.questionList = res[1] ? (res[1].list || []) : []
       }).catch(() => {
         this.categoriesList = []
         this.questionList = []
@@ -156,9 +156,9 @@
      * @desc 最近的活动
      * @method getRecentActivity
      */
-    public getRecentActivity() {
-      api.recentActivity({ language: this.language }).then(response => {
-        const { list } = response.data.data
+    public getRecentActivity(): void {
+      api.getRecentActivity({ language: this.language }).then((res: any) => {
+        const { list } = res
         if (list.length === setting.defaultPageSize) {
           this.isShowMore = true
         } else {
@@ -175,9 +175,9 @@
      * @desc 最近的活动-更多
      * @method getRecentActivityMore
      */
-    public getRecentActivityMore() {
-      api.recentActivity({ language: this.language, searchTime: this.recentActivityTime }).then(response => {
-        const { list } = response.data.data
+    public getRecentActivityMore(): void {
+      api.getRecentActivity({ language: this.language, searchTime: this.recentActivityTime }).then((res: any) => {
+        const { list } = res
         if (list.length === setting.defaultPageSize) {
           this.isShowMore = true
         } else {

@@ -54,8 +54,8 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import { AppModule } from '@/store/modules/app'
-  import * as api from '@/api'
-  import * as util from '@/util/index'
+  import api from '@/api'
+  import util from '@/util/index'
   import setting from '@/settings'
 
   /**
@@ -86,7 +86,7 @@
     categoriesTotle: number = 0
     articleDetail: any = {}
 
-    get language() {
+    get language():string {
       return AppModule.language
     }
 
@@ -94,7 +94,7 @@
      * @desc 切换语言
      * @method onLanguageChange
      */
-    onLanguageChange() {
+    onLanguageChange():void {
       util.setTitle(this.$route.name)
       this.getData()
     }
@@ -104,7 +104,7 @@
      * @param {String} val 内容
      * @method onSearchChange
      */
-    onSearchChange(val: string) {
+    onSearchChange(val: string):void {
       this.$router.push({
         name: 'search',
         query: {
@@ -117,16 +117,16 @@
      * @description 获取数据
      * @method getData
      */
-    getData() {
+    getData():void {
       Promise.all([api.getArticlesByCategory({
         language: this.language,
         categoryId: this.categoryId,
         pageIndex: 1,
         pageSize: setting.defaultPageSize
-      }), api.getArticleDetailInfo({ language: this.language, articleId: this.id })]).then((response) => {
-        this.categoriesList = response[0].data.data.list || []
-        this.categoriesTotle = response[0].data.data.total
-        this.articleDetail = response[1].data.data
+      }), api.getArticleDetailInfo({ language: this.language, articleId: this.id })]).then((res: any) => {
+        this.categoriesList = res[0].list || []
+        this.categoriesTotle = res[0].total
+        this.articleDetail = res[1]
       }).catch(() => {
         this.categoriesList = []
         this.categoriesTotle = 0
@@ -134,10 +134,10 @@
       })
     }
 
-    created() {
+    created():void {
       util.setTitle(this.$route.name)
-      this.categoryId = this.$route.params.categoryId
-      this.id = this.$route.params.id
+      this.categoryId = this.$route.params['categoryId']
+      this.id = this.$route.params['id']
       this.getData()
     }
 

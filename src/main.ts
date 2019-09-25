@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
 import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -7,7 +8,6 @@ import router from '@/router/index'
 import i18n from '@/lang'
 import setting from '@/settings'
 import moment from 'moment'
-import { Component } from 'vue-property-decorator'
 
 import CHeader from '@/components/c-header/index.vue'
 import CFooter from '@/components/c-footer/index.vue'

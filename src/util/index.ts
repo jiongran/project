@@ -1,15 +1,15 @@
 import setting from '@/settings'
 import i18n from '@/lang'
 
-export const getLange = (language: string = setting.defaultLanguage) => {
+const getLange = (language: string = setting.defaultLanguage) => {
   const stringEmum: any = {
     'zhchs': '简体中文',
     'en': 'English'
   }
-  return stringEmum[language]
+  return stringEmum[language] || stringEmum[setting.defaultLanguage]
 }
 
-export const getAppdown = () => {
+const getAppdown = (): number => {
   let mobileSystem = 0
   let ua = navigator.userAgent
   if (/(iPhone|iPad|iPod|iOS)/i.test(ua)) {
@@ -20,23 +20,23 @@ export const getAppdown = () => {
   return mobileSystem
 }
 
-export const clone = (obj: any) => {
+const clone = (obj: any): any => {
   if (typeof obj === 'object' && obj !== null) {
-    var o = Object.prototype.toString.call(obj).slice(8, -1) === 'Array' ? [] : {}
-    for (var k in obj) {
+    let o = Object.prototype.toString.call(obj).slice(8, -1) === 'Array' ? [] : {}
+    for (let k in obj) {
       if (typeof obj[k] === 'object' && obj[k] !== null) {
         (o as any)[k] = clone(obj[k])
       } else {
         (o as any)[k] = obj[k]
       }
     }
+    return o
   } else {
     return obj
   }
-  return o
 }
 
-export const diaplayTime = (dateTimeStamp: number) => {
+const diaplayTime = (dateTimeStamp: number): string => {
   let result: string = ''
   const minute = 1000 * 60
   const hour = minute * 60
@@ -72,7 +72,15 @@ export const diaplayTime = (dateTimeStamp: number) => {
   return result
 }
 
-export const setTitle = (val: string = 'index') => {
+const setTitle = (val: string = 'index'): void => {
   let str = val
   document.title = (i18n.t('router.' + str) as string)
+}
+
+export default {
+  getLange,
+  getAppdown,
+  clone,
+  diaplayTime,
+  setTitle
 }

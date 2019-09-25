@@ -2,7 +2,7 @@ import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-dec
 import setting from '@/settings'
 import { setLanguage } from '@/util/cookies'
 import { getLocale } from '@/lang'
-import { getLanguage } from '@/api'
+import api from '@/api'
 import store from '@/store/index'
 
 export interface IAppState {
@@ -26,7 +26,7 @@ class App extends VuexModule implements IAppState {
 
   @Action
   public getLanguageList() {
-    return getLanguage()
+    return api.getLanguage()
   }
 }
 

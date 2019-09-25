@@ -1,61 +1,83 @@
 import request from '@/util/request'
+import {
+  ICategoriesData,
+  IRecentData,
+  IPromotedArticlesData,
+  IAllChildCategoriesArticlesData,
+  IArticlesByCategoryData,
+  IArticleDetailInfoData,
+  IFullTextSearchData
+} from './types'
+
 let prefixerForProxy: string = ''
 
 if (process.env.NODE_ENV === 'development') {
   prefixerForProxy = 'http://searchapi.ledx.xyz'
 }
 
-export const getLanguage = () =>
-  request({
-    url: `${prefixerForProxy}/api/Common/GetLanguages`,
-    method: 'get'
-  })
+const getLanguage = () =>
+request({
+  url: `${prefixerForProxy}/api/Common/GetLanguages`,
+  method: 'get'
+})
 
-export const getCategories = (data: any) =>
-  request({
-    url: `${prefixerForProxy}/api/Common/GetCategories`,
-    method: 'post',
-    data
-  })
+const getCategories = (data: ICategoriesData) =>
+request({
+  url: `${prefixerForProxy}/api/Common/GetCategories`,
+  method: 'post',
+  data
+})
 
-export const recentActivity = (data: any) =>
-  request({
-    url: `${prefixerForProxy}/api/Common/recentActivity`,
-    method: 'post',
-    data
-  })
+const getRecentActivity = (data: IRecentData) =>
+request({
+  url: `${prefixerForProxy}/api/Common/recentActivity`,
+  method: 'post',
+  data
+})
 
-export const promotedArticles = (data: any) =>
-  request({
-    url: `${prefixerForProxy}/api/Articles/PromotedArticles`,
-    method: 'post',
-    data
-  })
+const promotedArticles = (data: IPromotedArticlesData) =>
+request({
+  url: `${prefixerForProxy}/api/Articles/PromotedArticles`,
+  method: 'post',
+  data
+})
 
-export const getAllChildCategoriesArticles = (data: any) =>
-  request({
-    url: `${prefixerForProxy}/api/Articles/getAllChildCategoriesArticles`,
-    method: 'post',
-    data
-  })
+const getAllChildCategoriesArticles = (data: IAllChildCategoriesArticlesData) =>
+request({
+  url: `${prefixerForProxy}/api/Articles/getAllChildCategoriesArticles`,
+  method: 'post',
+  data
+})
 
-export const getArticlesByCategory = (data: any) =>
-  request({
-    url: `${prefixerForProxy}/api/Articles/getArticlesByCategory`,
-    method: 'post',
-    data
-  })
+const getArticlesByCategory = (data: IArticlesByCategoryData) =>
+request({
+  url: `${prefixerForProxy}/api/Articles/getArticlesByCategory`,
+  method: 'post',
+  data
+})
 
-export const getArticleDetailInfo = (data: any) =>
-  request({
-    url: `${prefixerForProxy}/api/Articles/getArticleDetailInfo`,
-    method: 'post',
-    data
-  })
+const getArticleDetailInfo = (data: IArticleDetailInfoData) =>
+request({
+  url: `${prefixerForProxy}/api/Articles/getArticleDetailInfo`,
+  method: 'post',
+  data
+})
 
-export const fullTextSearch = (data: any) =>
-  request({
-    url: `${prefixerForProxy}/api/Articles/fullTextSearch`,
-    method: 'post',
-    data
-  })
+const fullTextSearch = (data: IFullTextSearchData) =>
+request({
+  url: `${prefixerForProxy}/api/Articles/fullTextSearch`,
+  method: 'post',
+  data
+})
+
+export default {
+  namespaced: true,
+  getLanguage,
+  getCategories,
+  getRecentActivity,
+  promotedArticles,
+  getAllChildCategoriesArticles,
+  getArticlesByCategory,
+  getArticleDetailInfo,
+  fullTextSearch
+}

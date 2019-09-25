@@ -23,7 +23,7 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import { AppModule } from '@/store/modules/app'
-  import * as util from '@/util/index'
+  import util from '@/util/index'
 
   @Component({
     name: 'CHeader'
@@ -46,9 +46,8 @@
     }
 
     mounted() {
-      AppModule.getLanguageList().then(
-      (res): any => {
-        const { list } = res.data.data
+      AppModule.getLanguageList().then((res: any) => {
+        const { list } = res
         this.languageList = list || []
       })
     }

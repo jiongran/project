@@ -53,8 +53,8 @@
    */
   import { Component, Vue } from 'vue-property-decorator'
   import { AppModule } from '@/store/modules/app'
-  import * as api from '@/api'
-  import * as util from '@/util/index'
+  import api from '@/api'
+  import util from '@/util/index'
   import setting from '@/settings'
 
   @Component({
@@ -81,11 +81,11 @@
     topCategoryName:string= ''
     currentCategoryName:string= ''
 
-    get language() {
+    get language():string {
       return AppModule.language
     }
-    get pcFlag () {
-      var flag = false
+    get pcFlag ():boolean {
+      let flag = false
       if (!this.isPc) {
         if (this.total && this.total > setting.defaultPageSize) {
           flag = true
@@ -98,7 +98,7 @@
      * @desc 切换语言
      * @method onLanguageChange
      */
-    onLanguageChange () {
+    onLanguageChange ():void {
       util.setTitle(this.$route.name)
       this.pageSize = setting.defaultPageSize
       this.pageIndex = 1
@@ -110,7 +110,7 @@
      * @method onSearchChange
      * @param {String} val - 查询内容
      */
-    onSearchChange (val:string) {
+    onSearchChange (val:string):void {
       this.$router.push({
         name: 'search',
         query: {
@@ -123,7 +123,7 @@
      * @method handleSizeChange
      * @param {Number} val - 每页长度
      */
-    handleSizeChange (val:number) {
+    handleSizeChange (val:number):void {
       this.pageSize = val
       this.pageIndex = 1
       this.getData()
@@ -134,7 +134,7 @@
      * @method handleCurrentChange
      * @param {Number} val - 页码
      */
-    handleCurrentChange (val:number) {
+    handleCurrentChange (val:number):void {
       this.pageIndex = val
       this.getData()
     }
@@ -143,14 +143,14 @@
      * @desc 获取数据
      * @method getData
      */
-    getData () {
+    getData ():void {
       api.getArticlesByCategory({
         language: this.language,
-        categoryId: this.$route.params.id,
+        categoryId: this.$route.params['id'],
         pageIndex: this.pageIndex,
         pageSize: !this.isPc ? this.pageSize : this.pageSize * 5
-      }).then(res => {
-        const { list, total } = res.data.data
+      }).then((res: any) => {
+        const { list, total } = res
         this.total = total
         this.categoriesList = list || []
         this.topCategoryId = this.categoriesList.length > 0 ? this.categoriesList[0].topCategoryId : ''

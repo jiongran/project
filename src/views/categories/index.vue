@@ -48,8 +48,8 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import { AppModule } from '@/store/modules/app'
-  import * as api from '@/api'
-  import * as util from '@/util/index'
+  import api from '@/api'
+  import util from '@/util/index'
   import setting from '@/settings'
 
   /**
@@ -70,7 +70,7 @@
     currentCategoryDescription: string = ''
     categoriesList: Array<any> = []
 
-    get language() {
+    get language(): string {
       return AppModule.language
     }
 
@@ -78,7 +78,7 @@
      * @desc 切换语言
      * @method onLanguageChange
      */
-    onLanguageChange() {
+    onLanguageChange(): void {
       util.setTitle(this.$route.name)
       this.getData()
     }
@@ -88,7 +88,7 @@
      * @param {String} val 内容
      * @method onSearchChange
      */
-    onSearchChange(val:string) {
+    onSearchChange(val: string): void {
       this.$router.push({
         name: 'search',
         query: {
@@ -101,9 +101,12 @@
      * @description 获取数据
      * @method getData
      */
-    getData() {
-      api.getAllChildCategoriesArticles({ language: this.language, categoryId: this.$route.params.id }).then(res => {
-        const { list } = res.data.data
+    getData(): void {
+      api.getAllChildCategoriesArticles({
+        language: this.language,
+        categoryId: this.$route.params['id']
+      }).then((res: any) => {
+        const { list } = res
         this.categoriesList = list || []
         this.currentCategoryName = this.categoriesList.length > 0 ? this.categoriesList[0].topCategoryName : ''
         this.currentCategoryDescription = this.categoriesList.length > 0 ? this.categoriesList[0].topCategorySubName : ''

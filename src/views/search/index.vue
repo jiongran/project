@@ -57,8 +57,8 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import { AppModule } from '@/store/modules/app'
-  import * as api from '@/api'
-  import * as util from '@/util/index'
+  import api from '@/api'
+  import util from '@/util/index'
   import setting from '@/settings'
 
   /**
@@ -70,7 +70,7 @@
    *
    */
   @Component({
-    name: 'Categories'
+    name: 'Search'
   })
   export default class extends Vue {
     /**
@@ -89,12 +89,12 @@
     total: number = 0
     list: Array<any> = []
 
-    get language() {
+    get language(): string {
       return AppModule.language
     }
 
-    get pcFlag() {
-      var flag = false
+    get pcFlag(): boolean {
+      let flag = false
       if (!this.isPc) {
         if (this.total && this.total > setting.defaultPageSize) {
           flag = true
@@ -107,7 +107,7 @@
      * @desc 切换语言
      * @method onLanguageChange
      */
-    onLanguageChange() {
+    onLanguageChange(): void {
       util.setTitle(this.$route.name)
       this.getList()
     }
@@ -116,15 +116,15 @@
      * @desc 获取数据
      * @method getList
      */
-    getList() {
+    getList(): void {
       let data = {
         content: this.name,
         language: this.language,
         pageSize: !this.isPc ? this.pageSize : this.pageSize * 5,
         pageIndex: this.pageIndex
       }
-      api.fullTextSearch(data).then(res => {
-        const { list, total } = res.data.data
+      api.fullTextSearch(data).then((res: any) => {
+        const { list, total } = res
         // this.list = [].concat(this.changeColor(list || []))
         this.list = [...(this.changeColor(list))]
         this.total = total
@@ -140,9 +140,9 @@
      * @param {Object|Array} dataList - 列表数据
      * @return {Object|Array} list - 列表数据
      */
-    changeColor(dataList: Array<any>) {
+    changeColor(dataList: Array<any>): Array<any> {
       let list = []
-      for (var i = 0; i < dataList.length; i++) {
+      for (let i = 0; i < dataList.length; i++) {
         if (this.name && this.name.length > 0) {
           let replaceReg = new RegExp(this.name, 'g')
           // 高亮替换v-html值
@@ -160,7 +160,7 @@
      * @method onSearchChange
      * @param {String} val - 查询内容
      */
-    onSearchChange(val: string) {
+    onSearchChange(val: string): void {
       if (val) {
         this.name = val
         this.getList()
@@ -174,7 +174,7 @@
      * @method handleSizeChange
      * @param {Number} val - 每页长度
      */
-    handleSizeChange(val: number) {
+    handleSizeChange(val: number): void {
       this.pageSize = val
       this.pageIndex = 1
       this.getList()
@@ -185,7 +185,7 @@
      * @method handleCurrentChange
      * @param {Number} val - 页码
      */
-    handleCurrentChange(val: number) {
+    handleCurrentChange(val: number): void {
       this.pageIndex = val
       this.getList()
     }
