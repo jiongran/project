@@ -13,6 +13,13 @@ let prefixerForProxy: string = ''
 
 if (process.env.NODE_ENV === 'development') {
   prefixerForProxy = 'http://searchapi.ledx.xyz'
+} else {
+  if (process.env.VUE_APP_TITLE === 'alpha') {
+    prefixerForProxy = 'http://searchapi.ledx.xyz'
+  }
+  else if (process.env.VUE_APP_TITLE === 'beta') {
+    prefixerForProxy = 'https://hsapi.aoo.world'
+  }
 }
 
 const getLanguage = () =>
