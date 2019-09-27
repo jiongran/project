@@ -6,6 +6,8 @@
     "serve": "vue-cli-service serve",
     "alpha": "vue-cli-service build --mode alpha",
     "beta": "vue-cli-service build --mode beta",
+    "tep": "node scripts/template",
+    "comtep": "node scripts/componentsTemplate",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

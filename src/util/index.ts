@@ -1,6 +1,11 @@
 import setting from '@/settings'
 import i18n from '@/lang'
 
+/**
+ * @remarks 根据语言枚举返回对应翻译(如没有则返回默认)
+ * @param language 语言枚举
+ * @returns 语言枚举对应翻译
+ */
 const getLange = (language: string = setting.defaultLanguage) => {
   const stringEmum: any = {
     'zhchs': '简体中文',
