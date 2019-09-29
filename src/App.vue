@@ -1,17 +1,25 @@
 <template>
   <div id="app">
+    <i18n path="components.names" :locale="language" tag="div" class="div">
+      <a href="/" target="_blank">{{ $t('components.search') }}</a>
+    </i18n>
     <router-view/>
   </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
+  import { AppModule } from '@/store/modules/app'
 
   @Component({
     name: 'App'
   })
   export default class extends Vue {
     isRouterAlive: boolean = true
+
+    get language(): string {
+      return AppModule.language
+    }
 
     reload():void {
       this.isRouterAlive = false

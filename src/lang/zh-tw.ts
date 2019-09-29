@@ -1,6 +1,7 @@
 export default {
   components: {
     search: '搜索',
+    names: '{0}名稱',
     searchContext: '請輸入內容',
     noData: '暫無數據',
     yearLater: '年前',

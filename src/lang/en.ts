@@ -1,6 +1,7 @@
 export default {
   components: {
     search: 'Search',
+    names: '{0} Name',
     searchContext: 'Please enter the content',
     noData: 'No Data',
     yearLater: ' years ago',
