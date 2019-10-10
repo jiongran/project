@@ -9,11 +9,11 @@
     "tep": "node scripts/template",
     "comtep": "node scripts/componentsTemplate",
     "lint": "vue-cli-service lint",
-    "commitizen": "commitizen init cz-conventional-changelog --save --save-exact"
+    "commitizen": "commitizen init cz-conventional-changelog --save --save-exact",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -w -r 0"
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "commitizen": "^4.0.3",
     "core-js": "^2.6.2",
     "element-ui": "^2.12.0",
     "js-cookie": "^2.2.1",
@@ -42,6 +42,8 @@
     "@vue/eslint-config-typescript": "^4.0.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
+    "commitizen": "^4.0.3",
+    "conventional-changelog-cli": "^2.0.25",
     "cz-conventional-changelog": "^3.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
@@ -116,7 +118,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -e $GIT_PARAMS"
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
