@@ -81,6 +81,7 @@
      * @property {Number} pageSize - 每页长度
      * @property {Number} total - 总条数
      * @property {Array} list - 列表
+     * @property {Any} timer - 计时器
      */
     isPc: number = util.getAppdown()
     name: any = ''
@@ -88,6 +89,7 @@
     pageSize: number = setting.defaultPageSize
     total: number = 0
     list: Array<any> = []
+    timer: any = null
 
     get language(): string {
       return AppModule.language
@@ -109,7 +111,9 @@
      */
     onLanguageChange(): void {
       util.setTitle(this.$route.name)
-      this.getList()
+      if (this.$route.name) {
+        this.getList()
+      }
     }
 
     /**
@@ -120,7 +124,7 @@
       let data = {
         content: this.name,
         language: this.language,
-        pageSize: !this.isPc ? this.pageSize : this.pageSize * 5,
+        pageSize: this.pageSize,
         pageIndex: this.pageIndex
       }
       api.fullTextSearch(data).then((res: any) => {
@@ -164,9 +168,35 @@
     onSearchChange(val: string): void {
       if (val) {
         this.name = val
-        this.getList()
+        this.fnThrottle(this.getList, 500, 2000)
       } else {
         this.$message({ message: (this.$t('components.searchContext') as string), type: 'warning' })
+      }
+    }
+
+    /**
+     * @desc 节流请求
+     * @method fnThrottle
+     * @param {Function} method - 执行函数
+     * @param {Number} delay - 延迟时间
+     * @param {Number} duration - 间隔时间
+     */
+    fnThrottle(method = function() {
+    }, delay = 500, duration = 2000) {
+      const that = this
+      let timer = this.timer
+      let begin = new Date().getTime()
+      return function() {
+        let current = new Date().getTime()
+        clearTimeout(timer)
+        if (current - begin >= duration) {
+          method()
+          begin = current
+        } else {
+          that.timer = setTimeout(function() {
+            method()
+          }, delay)
+        }
       }
     }
 
@@ -194,11 +224,12 @@
     mounted() {
       util.setTitle(this.$route.name)
       this.name = this.$route.query.name
-      this.getList()
+      if (this.name) {
+        this.getList()
+      }
     }
   }
 </script>
-
 <style scoped lang="less">
   .search {
     line-height: 1.5;
