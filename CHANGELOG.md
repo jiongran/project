@@ -9,6 +9,7 @@
 
 ### Features
 
+* **新增图片缩放:** 文章中的图片可以进行点击缩放 ([2ac7057](https://github.com/jiongran/project/commit/2ac7057))
 * **添加git提交记录:** 生成更新日志树 ([a65c7e5](https://github.com/jiongran/project/commit/a65c7e5))
 * **添加日志记录和修改配置:** package配置修改 添加GIT提交记录 ([6fa2fd9](https://github.com/jiongran/project/commit/6fa2fd9))
 
