@@ -54,6 +54,7 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import { AppModule } from '@/store/modules/app'
+  import mediumZoom from 'medium-zoom'
   import api from '@/api'
   import util from '@/util/index'
   import setting from '@/settings'
@@ -127,6 +128,9 @@
         this.categoriesList = res[0].list || []
         this.categoriesTotle = res[0].total
         this.articleDetail = res[1]
+        setTimeout(() => {
+          mediumZoom('.detail-content-info img')
+        }, 0)
       }).catch(() => {
         this.categoriesList = []
         this.categoriesTotle = 0
